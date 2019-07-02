@@ -59,6 +59,7 @@ namespace Core_Authentication
 
             // configure DI for application services
             services.AddScoped<IUserService, UserService>();
+            services.AddSwaggerDocument();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +69,11 @@ namespace Core_Authentication
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
+
+            app.UseMvcWithDefaultRoute();
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseMvc();
         }

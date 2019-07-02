@@ -8,6 +8,7 @@ using Core_Authentication.Entities;
 using Core_Authentication.Helpers;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Microsoft.Extensions.Options;
 
 namespace Core_Authentication.Services
 {
@@ -28,6 +29,10 @@ namespace Core_Authentication.Services
 
         private readonly AppSettings _appSettings;
 
+        public UserService(IOptions<AppSettings> appSettings)
+        {
+            _appSettings = appSettings.Value;
+        }
 
         public User Authenticate(string username, string password)
         {
